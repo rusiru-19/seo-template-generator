@@ -20,19 +20,22 @@ export const metadata: Metadata = {
   keywords: [
     "web, design, seo, seo-generator, google-crawlers"
   ],
+    verification: {
+    google: 'I8ujhWmul-5xSK7sX9MdgvRDZOTjJpwEdsNL3asEfZE',
+  },
   authors: [{ name: "Rusiru Thamara" }],
   alternates: {
-    canonical: "https://example.com",
+    canonical: "https://seo-template-generator-git-master-evildevs-projects.vercel.app/",
   },
   openGraph: {
     title: "SEO template Generator ",
     description:
       "Generate fully optimized SEO meta tags for HTML, React, Vue, and Angular projects in seconds. Easy, open-source, and ready to boost your website's search engine visibility.",
-    url: "https://example.com",
+    url: "https://seo-template-generator-git-master-evildevs-projects.vercel.app/",
     siteName: "SEO template Generator ",
     images: [
       {
-        url: "https://example.com/image.png",
+        url: "https://seo-template-generator-git-master-evildevs-projects.vercel.app/image.png",
         width: 1200,
         height: 630,
         alt: "SEO template Generator ",
@@ -46,9 +49,9 @@ export const metadata: Metadata = {
     title: "SEO template Generator ",
     description:
       "Generate fully optimized SEO meta tags for HTML, React, Vue, and Angular projects in seconds. Easy, open-source, and ready to boost your website's search engine visibility.",
-    images: ["https://example.com/image.png"],
+    images: ["https://seo-template-generator-git-master-evildevs-projects.vercel.app/image.png"],
   },
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://seo-template-generator-git-master-evildevs-projects.vercel.app/"),
 };
   
 export default function RootLayout({
