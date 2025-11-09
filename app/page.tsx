@@ -94,7 +94,7 @@ export default function Home() {
     {/* Center: GitHub & links */}
     <div className="flex gap-4 text-sm">
       <a
-        href="https://github.com/your-username/your-repo"
+        href="https://github.com/rusiru-19/seo-template-generator"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-1 hover:text-primary transition-colors"
@@ -113,10 +113,10 @@ export default function Home() {
         </svg>
         GitHub
       </a>
-      <a href="/contribute" className="hover:text-primary transition-colors">
+      <a href="https://github.com/rusiru-19/seo-template-generator" className="hover:text-primary transition-colors">
         Contribute
       </a>
-      <a href="/issues" className="hover:text-primary transition-colors">
+      <a href="https://github.com/rusiru-19/seo-template-generator/issues" className="hover:text-primary transition-colors">
         Issues
       </a>
     </div>
