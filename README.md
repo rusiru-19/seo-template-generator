@@ -31,3 +31,7 @@ Many people spend hundreds on SEO courses and tools, yet struggle to implement m
 ## 📦 Contributing
 
 We ❤️ contributions! Help us improve SEO Template Generator by submitting issues, adding new frameworks, improving the UI, or fixing bugs.  
+
+ <a href = "https://github.com/rusiru-19/seo-template-generator/graphs/contributors">
+   <img src = "https://contrib.rocks/image?repo=rusiru-19/seo-template-generator"/>
+ </a>
