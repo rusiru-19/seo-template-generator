@@ -1,6 +1,6 @@
 # SEO Template Generator
 
-![License](https://img.shields.io/badge/license-MIT-green) ![GitHub stars](https://img.shields.io/github/stars/your-username/seo-template-generator?style=social)
+![License](https://img.shields.io/badge/license-MIT-green) ![GitHub stars](https://img.shields.io/github/stars/rusiru-19/seo-template-generator?style=social)
 
 An **open-source tool** to generate fully optimized meta tags, Open Graph, and Twitter cards for websites — supports **HTML, React/Next.js, Vue, and Angular**. Save time, improve SEO, and skip expensive courses or complex setups!
 
@@ -26,4 +26,8 @@ Many people spend hundreds on SEO courses and tools, yet struggle to implement m
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/seo-template-generator.git
+   git clone https://github.com/rusiru-19/seo-template-generator.git
+
+## 📦 Contributing
+
+We ❤️ contributions! Help us improve SEO Template Generator by submitting issues, adding new frameworks, improving the UI, or fixing bugs.  
