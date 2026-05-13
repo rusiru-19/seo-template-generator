@@ -12,62 +12,116 @@ interface TemplateProps {
     siteName: string
     ogImage: string
     siteUrl: string
+    googleVerification?: string
+    twitterHandle?: string
+    themeColor?: string
+    robots?: string
+    canonical?: string
   }
 }
 
 export default function AngularTemplate({ data }: TemplateProps) {
-  const angularCode = `
-  // app.component.ts
-import { Component } from '@angular/core';
+  const angularCode = `// app.component.ts OR seo.service.ts
+
 import { Meta, Title } from '@angular/platform-browser';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-})
-export class AppComponent {
-  data = {
-    title: "${data.title}",
-    description: "${data.description}",
-    keywords: "${data.keywords}",
-    author: "${data.author}",
-    siteUrl: "${data.siteUrl}",
-    siteName: "${data.siteName}",
-    ogImage: "${data.ogImage}",
-  };
+constructor(
+  private titleService: Title,
+  private meta: Meta
+) {}
 
-  constructor(private titleService: Title, private metaService: Meta) {
-    // Set page title
-    this.titleService.setTitle(this.data.title);
+ngOnInit() {
 
-    // Basic SEO
-    this.metaService.addTags([
-      { name: 'description', content: this.data.description },
-      { name: 'keywords', content: this.data.keywords },
-      { name: 'author', content: this.data.author },
-      { name: 'canonical', content: this.data.siteUrl },
+  this.titleService.setTitle("${data.title}");
 
-      // Open Graph
-      { property: 'og:title', content: this.data.title },
-      { property: 'og:description', content: this.data.description },
-      { property: 'og:url', content: this.data.siteUrl },
-      { property: 'og:site_name', content: this.data.siteName },
-      { property: 'og:image', content: this.data.ogImage },
-      { property: 'og:image:width', content: '1200' },
-      { property: 'og:image:height', content: '630' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:locale', content: 'en_US' },
+  this.meta.addTags([
+    {
+      name: 'description',
+      content: '${data.description}'
+    },
 
-      // Twitter
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: this.data.title },
-      { name: 'twitter:description', content: this.data.description },
-      { name: 'twitter:image', content: this.data.ogImage },
-    ]);
-  }
+    {
+      name: 'keywords',
+      content: '${data.keywords}'
+    },
+
+    {
+      name: 'author',
+      content: '${data.author}'
+    },
+
+    {
+      name: 'robots',
+      content: '${
+        data.robots || "index, follow"
+      }'
+    },
+
+    {
+      property: 'og:title',
+      content: '${data.title}'
+    },
+
+    {
+      property: 'og:description',
+      content: '${data.description}'
+    },
+
+    {
+      property: 'og:image',
+      content: '${data.ogImage}'
+    },
+
+    {
+      property: 'og:url',
+      content: '${data.siteUrl}'
+    },
+
+    {
+      property: 'og:type',
+      content: 'website'
+    },
+
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+
+    {
+      name: 'twitter:title',
+      content: '${data.title}'
+    },
+
+    {
+      name: 'twitter:description',
+      content: '${data.description}'
+    },
+
+    {
+      name: 'twitter:image',
+      content: '${data.ogImage}'
+    },
+
+    ${
+      data.twitterHandle
+        ? `{
+      name: 'twitter:creator',
+      content: '${data.twitterHandle}'
+    },`
+        : ""
+    }
+
+    ${
+      data.googleVerification
+        ? `{
+      name: 'google-site-verification',
+      content: '${data.googleVerification}'
+    },`
+        : ""
+    }
+  ]);
 }
-
-  `
+`
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(angularCode)

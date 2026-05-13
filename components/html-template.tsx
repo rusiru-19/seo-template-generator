@@ -12,46 +12,83 @@ interface TemplateProps {
     siteName: string
     ogImage: string
     siteUrl: string
+    googleVerification?: string
+    twitterHandle?: string
+    themeColor?: string
+    robots?: string
+    canonical?: string
   }
 }
 
 export default function HtmlTemplate({ data }: TemplateProps) {
-  const htmlCode = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${data.title}</title>
-  <meta name="description" content="${data.description}" />
-  <meta name="keywords" content="${data.keywords}" />
-  <meta name="author" content="${data.author}" />
-  <link rel="canonical" href="${data.siteUrl}" />
+const htmlCode = `<!-- Basic SEO -->
+<title>${data.title}</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="${data.title}" />
-  <meta property="og:description" content="${data.description}" />
-  <meta property="og:url" content="${data.siteUrl}" />
-  <meta property="og:site_name" content="${data.siteName}" />
-  <meta property="og:image" content="${data.ogImage}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_US" />
+<meta name="description" content="${data.description}" />
+<meta name="keywords" content="${data.keywords}" />
+<meta name="author" content="${data.author}" />
+<meta name="robots" content="${
+  data.robots || "index, follow"
+}" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${data.title}" />
-  <meta name="twitter:description" content="${data.description}" />
-  <meta name="twitter:image" content="${data.ogImage}" />
-</head>
-<body>
-  <!-- Page content -->
-</body>
-</html>
+<!-- Canonical -->
+<link rel="canonical" href="${
+  data.canonical || data.siteUrl
+}" />
 
+<!-- Theme -->
+<meta name="theme-color" content="${
+  data.themeColor || "#000000"
+}" />
 
-  `
+<!-- Open Graph -->
+<meta property="og:title" content="${
+  data.title
+}" />
+<meta property="og:description" content="${
+  data.description
+}" />
+<meta property="og:url" content="${
+  data.siteUrl
+}" />
+<meta property="og:site_name" content="${
+  data.siteName
+}" />
+<meta property="og:image" content="${
+  data.ogImage
+}" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${
+  data.title
+}" />
+<meta name="twitter:description" content="${
+  data.description
+}" />
+<meta name="twitter:image" content="${
+  data.ogImage
+}" />
+${
+  data.twitterHandle
+    ? `<meta name="twitter:creator" content="${data.twitterHandle}" />`
+    : ""
+}
+
+<!-- Verification -->
+${
+  data.googleVerification
+    ? `<meta name="google-site-verification" content="${data.googleVerification}" />`
+    : ""
+}
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+`
+
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(htmlCode)

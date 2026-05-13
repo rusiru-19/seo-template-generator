@@ -13,64 +13,127 @@ interface TemplateProps {
     siteName: string
     ogImage: string
     siteUrl: string
+    googleVerification?: string
+    twitterHandle?: string
+    themeColor?: string
+    robots?: string
+    canonical?: string
   }
 }
 
 export default function VueTemplate({ data }: TemplateProps) {
-  const vueCode = `
-  <template>
-  <div>
-    <!-- Your page content -->
-  </div>
-</template>
-
-<script setup>
-const data = {
+const vueCode = `<script setup>
+useHead({
   title: "${data.title}",
-  description: "${data.description}",
-  keywords: "${data.keywords}",
-  author: "${data.author}",
-  siteUrl: "${data.siteUrl}",
-  siteName: "${data.siteName}",
-  ogImage: "${data.ogImage}",
-};
+
+  meta: [
+    {
+      name: "description",
+      content: "${data.description}"
+    },
+
+    {
+      name: "keywords",
+      content: "${data.keywords}"
+    },
+
+    {
+      name: "author",
+      content: "${data.author}"
+    },
+
+    {
+      name: "robots",
+      content: "${
+        data.robots || "index, follow"
+      }"
+    },
+
+    {
+      property: "og:title",
+      content: "${data.title}"
+    },
+
+    {
+      property: "og:description",
+      content: "${data.description}"
+    },
+
+    {
+      property: "og:image",
+      content: "${data.ogImage}"
+    },
+
+    {
+      property: "og:url",
+      content: "${data.siteUrl}"
+    },
+
+    {
+      property: "og:type",
+      content: "website"
+    },
+
+    {
+      name: "twitter:card",
+      content: "summary_large_image"
+    },
+
+    {
+      name: "twitter:title",
+      content: "${data.title}"
+    },
+
+    {
+      name: "twitter:description",
+      content: "${data.description}"
+    },
+
+    {
+      name: "twitter:image",
+      content: "${data.ogImage}"
+    },
+
+    ${
+      data.twitterHandle
+        ? `{
+      name: "twitter:creator",
+      content: "${data.twitterHandle}"
+    },`
+        : ""
+    }
+
+    ${
+      data.googleVerification
+        ? `{
+      name: "google-site-verification",
+      content: "${data.googleVerification}"
+    },`
+        : ""
+    }
+  ],
+
+  link: [
+    {
+      rel: "canonical",
+      href: "${
+        data.canonical || data.siteUrl
+      }"
+    },
+
+    {
+      rel: "icon",
+      href: "/favicon.ico"
+    },
+
+    {
+      rel: "manifest",
+      href: "/site.webmanifest"
+    }
+  ]
+})
 </script>
-
-<script>
-export default {
-  head() {
-    return {
-      title: data.title,
-      meta: [
-        { name: "description", content: data.description },
-        { name: "keywords", content: data.keywords },
-        { name: "author", content: data.author },
-
-        // Open Graph
-        { property: "og:title", content: data.title },
-        { property: "og:description", content: data.description },
-        { property: "og:url", content: data.siteUrl },
-        { property: "og:site_name", content: data.siteName },
-        { property: "og:image", content: data.ogImage },
-        { property: "og:image:width", content: "1200" },
-        { property: "og:image:height", content: "630" },
-        { property: "og:type", content: "website" },
-        { property: "og:locale", content: "en_US" },
-
-        // Twitter
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: data.title },
-        { name: "twitter:description", content: data.description },
-        { name: "twitter:image", content: data.ogImage },
-      ],
-      link: [{ rel: "canonical", href: data.siteUrl }],
-    };
-  },
-};
-</script>
-
-  `
-
+`
   const copyToClipboard = () => {
     navigator.clipboard.writeText(vueCode)
   }
